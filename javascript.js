@@ -8,16 +8,20 @@ const playerFactory = () => {
   const selectionO = document.createElement("button");
   selectionO.textContent = "O";
   gameContainer.appendChild(selectionO);
+  const gameReset = document.createElement("button");
+  gameReset.textContent = "Reset";
+  gameContainer.appendChild(gameReset);
 
-  return { playerSelection, selectionX, selectionO };
+  return { playerSelection, selectionX, selectionO, gameReset };
 };
 
 const player = playerFactory();
 
 // module
 const Gameboard = (function () {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  let board = ["", "", "", "", "", "", "", "", ""];
   let gameOver = false;
+  const resetBtn = player.gameReset;
   const game = () => {
     for (let i = 0; i < 9; i += 1) {
       // create 9 buttons in a grid format of 3x3
@@ -82,6 +86,16 @@ const Gameboard = (function () {
         }
         gameSquare.removeEventListener("click", squareClick);
       };
+
+      // reset button
+      resetBtn.addEventListener("click", () => {
+        gameOver = false;
+        board = ["", "", "", "", "", "", "", "", ""];
+        player.playerSelection = "X";
+        gameSquare.textContent = board[i];
+        gameSquare.addEventListener("click", squareClick);
+      });
+
       gameSquare.addEventListener("click", squareClick);
     }
   };
