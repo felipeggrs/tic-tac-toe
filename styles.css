@@ -73,6 +73,20 @@ select {
   }
 }
 
+#mainContainer,
+#gameContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 5vh;
+}
+
+#gameContainer button {
+  width: 30vw;
+  font-size: 30px;
+}
+
 #gameTable {
   width: 300px;
   height: 300px;
@@ -87,10 +101,25 @@ select {
   background-color: black;
   width: 100px;
   height: 100px;
-  border: 1px solid red;
+  border: 1px solid greenyellow;
   color: white;
 }
 
 #gameTable button:hover {
-  background-color: gray;
+  background-color: rgba(172, 255, 47, 0.352);
+}
+
+body {
+  background-image: url(./img/background.jpg);
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+#selectWeapon {
+  color: white;
+  padding: 30px;
+  background-color: rgba(2, 2, 2, 0.253);
+  border-radius: 10px;
 }
