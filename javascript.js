@@ -14,11 +14,14 @@ const playerFactory = () => {
   gameContainer.appendChild(selectionO);
 
   const gameReset = document.createElement("button");
-  gameReset.textContent = "Reset";
+  gameReset.textContent = "New battle!";
   gameReset.setAttribute("style", "display: none");
   gameContainer.appendChild(gameReset);
 
-  return { playerSelection, selectionX, selectionO, gameReset };
+  const selectWeapon = document.createElement("h1");
+  selectWeapon.id = "selectWeapon";
+
+  return { playerSelection, selectionX, selectionO, gameReset, selectWeapon };
 };
 
 const player = playerFactory();
@@ -40,6 +43,7 @@ const Gameboard = (function () {
         player.playerSelection = "X";
         player.selectionX.setAttribute("style", "display: none");
         player.selectionO.setAttribute("style", "display: none");
+        player.selectWeapon.textContent = "Fight!";
       });
 
       // 'O' button: player chooses O
@@ -47,6 +51,7 @@ const Gameboard = (function () {
         player.playerSelection = "O";
         player.selectionX.setAttribute("style", "display: none");
         player.selectionO.setAttribute("style", "display: none");
+        player.selectWeapon.textContent = "Fight!";
       });
 
       // square click functionality
@@ -86,7 +91,8 @@ const Gameboard = (function () {
         // win or tie?
         if (checkWin()) {
           gameOver = true;
-          console.log(`Game over, player ${player.playerSelection} won!`);
+          player.gameReset.setAttribute("style", "display: inline-block");
+          player.selectWeapon.textContent = `Game over, player ${player.playerSelection} won!`;
         }
         if (!board.includes("")) {
           gameOver = true;
@@ -110,8 +116,10 @@ const Gameboard = (function () {
         gameSquare.textContent = board[i];
         gameSquare.addEventListener("click", squareClick);
 
+        player.gameReset.setAttribute("style", "display: none");
         player.selectionX.setAttribute("style", "display: inline-block");
         player.selectionO.setAttribute("style", "display: inline-block");
+        player.selectWeapon.textContent = "Select your weapon!";
       });
 
       gameSquare.addEventListener("click", squareClick);
@@ -125,15 +133,13 @@ const startGame = document.getElementById("startGame");
 function start() {
   player.selectionX.setAttribute("style", "display: inline-block");
   player.selectionO.setAttribute("style", "display: inline-block");
-  player.gameReset.setAttribute("style", "display: inline-block");
   Gameboard.game();
   startGame.setAttribute("style", "display: none");
   const gameContainer = document.getElementById("gameContainer");
-  const selectWeapon = document.createElement("h1");
-  selectWeapon.textContent = "Select your weapon!";
-  selectWeapon.id = "selectWeapon";
+
+  player.selectWeapon.textContent = "Select your weapon!";
   gameContainer.insertBefore(
-    selectWeapon,
+    player.selectWeapon,
     gameContainer.firstChild.nextSibling.nextSibling
   );
 }
