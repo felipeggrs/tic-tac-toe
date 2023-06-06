@@ -77,9 +77,15 @@ select {
 #gameContainer {
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
   align-items: center;
   padding: 5vh;
+}
+
+#footer > h3,
+#footer > h3 > a {
+  color: white;
+  text-decoration: none;
+  font-size: small;
 }
 
 #gameContainer button {
@@ -115,6 +121,10 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-color: black;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #selectWeapon {
